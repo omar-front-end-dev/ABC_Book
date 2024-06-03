@@ -1,0 +1,1222 @@
+{
+	"info": {
+		"_postman_id": "06dfa2c4-0506-4ab2-84a1-bfa1b5b2eb3f",
+		"name": "BookStore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2301214",
+		"_collection_link": "https://www.postman.com/cloudy-desert-492363/workspace/api-practice/collection/2301214-06dfa2c4-0506-4ab2-84a1-bfa1b5b2eb3f?action=share&source=collection_link&creator=2301214"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"const response = pm.response.json();\r",
+									"// console.log(response);\r",
+									"// Extract the token from the response body (replace 'token' with the actual key)\r",
+									"const token = response.data.token;\r",
+									"\r",
+									"// // Set the token as a global variable\r",
+									"pm.globals.set('auth_token', token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "mostafa@eraasoft.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}auth/login",
+							"host": [
+								"{{app_url}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "mostafa@eraasoft.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{app_url}}auth/login",
+									"host": [
+										"{{app_url}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "PHP/8.2.14"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "58"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-length",
+									"value": "97"
+								},
+								{
+									"key": "content-encoding",
+									"value": "br"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "date",
+									"value": "Sat, 27 Apr 2024 11:32:21 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "upgrade-insecure-requests"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"token\": \"2|eos9XvYF1jrREaYnKvBHz8Q4vW3Ymmp01hhbqUTg763b2b39\",\n        \"token_type\": \"Bearer\"\n    }\n}"
+						},
+						{
+							"name": "Error When Making Login Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "mostafa@eraasoft.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{app_url}}auth/login",
+									"host": [
+										"{{app_url}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "PHP/8.2.14"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-length",
+									"value": "89"
+								},
+								{
+									"key": "content-encoding",
+									"value": "br"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "date",
+									"value": "Sat, 27 Apr 2024 11:33:04 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "upgrade-insecure-requests"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The password field is required.\",\n    \"errors\": {\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"const response = pm.response.json();\r",
+									"// console.log(response);\r",
+									"// Extract the token from the response body (replace 'token' with the actual key)\r",
+									"const token = response.data.token;\r",
+									"\r",
+									"// // Set the token as a global variable\r",
+									"pm.globals.set('auth_token', token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Alaa Ali",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "magedali@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345678",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "12345678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}auth/register",
+							"host": [
+								"{{app_url}}auth"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register With Success Data",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Alaa Ali",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "magedali@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text"
+										},
+										{
+											"key": "password_confirmation",
+											"value": "12345678",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{app_url}}auth/register",
+									"host": [
+										"{{app_url}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "PHP/8.2.14"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "59"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-length",
+									"value": "97"
+								},
+								{
+									"key": "content-encoding",
+									"value": "br"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "date",
+									"value": "Sat, 27 Apr 2024 11:34:30 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "upgrade-insecure-requests"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"token\": \"3|wvOMBexMyS1NkJBQoCXUxXyxmBbnuE8GJva4afrn73c8f2c4\",\n        \"token_type\": \"Bearer\"\n    }\n}"
+						},
+						{
+							"name": "Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Alaa Ali",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "magedali@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "12345678",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password_confirmation",
+											"value": "12345678",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{app_url}}auth/register",
+									"host": [
+										"{{app_url}}auth"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Entity",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5, max=100"
+								},
+								{
+									"key": "x-powered-by",
+									"value": "PHP/8.2.14"
+								},
+								{
+									"key": "cache-control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "x-ratelimit-limit",
+									"value": "60"
+								},
+								{
+									"key": "x-ratelimit-remaining",
+									"value": "58"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "content-length",
+									"value": "129"
+								},
+								{
+									"key": "content-encoding",
+									"value": "br"
+								},
+								{
+									"key": "vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "date",
+									"value": "Sat, 27 Apr 2024 11:35:02 GMT"
+								},
+								{
+									"key": "server",
+									"value": "LiteSpeed"
+								},
+								{
+									"key": "platform",
+									"value": "hostinger"
+								},
+								{
+									"key": "content-security-policy",
+									"value": "upgrade-insecure-requests"
+								},
+								{
+									"key": "alt-svc",
+									"value": "h3=\":443\"; ma=2592000, h3-29=\":443\"; ma=2592000, h3-Q050=\":443\"; ma=2592000, h3-Q046=\":443\"; ma=2592000, h3-Q043=\":443\"; ma=2592000, quic=\":443\"; ma=2592000; v=\"43,46\""
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The email has already been taken. (and 1 more error)\",\n    \"errors\": {\n        \"email\": [\n            \"The email has already been taken.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update User Info",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the response body as JSON\r",
+									"const response = pm.response.json();\r",
+									"// console.log(response);\r",
+									"// Extract the token from the response body (replace 'token' with the actual key)\r",
+									"const token = response.data.token;\r",
+									"\r",
+									"// // Set the token as a global variable\r",
+									"pm.globals.set('auth_token', token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7|P3H0ReO2WJc1WA6YPfYZwChY731p4PfK71Ch1R2X52cce845",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"updated name\",\r\n    \"email\":\"updatedemail@eraasoft.com\",\r\n    \"password\":\"12345678\",\r\n    \"password_confirmation\":\"12345678\"\r\n}"
+						},
+						"url": {
+							"raw": "{{app_url}}user/update",
+							"host": [
+								"{{app_url}}user"
+							],
+							"path": [
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user info",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const token = pm.globals.get('auth_token'); // Replace 'auth_token' with the name of your global variable\r",
+									"\r",
+									"// Set the Authorization header with the Bearer token\r",
+									"pm.request.headers.add({\r",
+									"    key: 'Authorization',\r",
+									"    value: `Bearer ${token}`\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 1|4ZejPWoaMT3T8uKPNzTIEz2ny1jPfLmB0q4dsqKAdf4e0378",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{app_url}}user",
+							"host": [
+								"{{app_url}}user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "All Books (paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}books",
+							"host": [
+								"{{app_url}}books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}books/1",
+							"host": [
+								"{{app_url}}books"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter Books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}books?category=unde&minPrice=500&maxPrice=1000&sort=high",
+							"host": [
+								"{{app_url}}books"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "unde"
+								},
+								{
+									"key": "minPrice",
+									"value": "500"
+								},
+								{
+									"key": "maxPrice",
+									"value": "1000"
+								},
+								{
+									"key": "sort",
+									"value": "high"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "All Categories (paginated)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}books?category=true",
+							"host": [
+								"{{app_url}}books"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}categories/1",
+							"host": [
+								"{{app_url}}categories"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wishlist",
+			"item": [
+				{
+					"name": "add to wishlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bookId",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}wishlist/add",
+							"host": [
+								"{{app_url}}wishlist"
+							],
+							"path": [
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all wishlists for user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bookId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}wishlist/get",
+							"host": [
+								"{{app_url}}wishlist"
+							],
+							"path": [
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get count of items in wishlist",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bookId",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}wishlist/count",
+							"host": [
+								"{{app_url}}wishlist"
+							],
+							"path": [
+								"count"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove from wishlist",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "wishlistId",
+									"value": "12",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}wishlist/remove",
+							"host": [
+								"{{app_url}}wishlist"
+							],
+							"path": [
+								"remove"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## **Important note\n\n**You must be logged in to access these end points",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const token = pm.globals.get('auth_token'); // Replace 'auth_token' with the name of your global variable\r",
+							"\r",
+							"// Set the Authorization header with the Bearer token\r",
+							"pm.request.headers.add({\r",
+							"    key: 'Authorization',\r",
+							"    value: `Bearer ${token}`\r",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "add to cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "bookId",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}cart",
+							"host": [
+								"{{app_url}}cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update quantity of item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "qty",
+									"value": "2",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}cart/5",
+							"host": [
+								"{{app_url}}cart"
+							],
+							"path": [
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}cart",
+							"host": [
+								"{{app_url}}cart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "remove item",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}cart",
+							"host": [
+								"{{app_url}}cart"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## **Important note\n\n**You must be logged in to access these end points",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const token = pm.globals.get('auth_token'); // Replace 'auth_token' with the name of your global variable\r",
+							"\r",
+							"// Set the Authorization header with the Bearer token\r",
+							"pm.request.headers.add({\r",
+							"    key: 'Authorization',\r",
+							"    value: `Bearer ${token}`\r",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "new order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "customerName",
+									"value": "mostaf ali",
+									"type": "text"
+								},
+								{
+									"key": "customerEmail",
+									"value": "mostafa@eraasoft.com",
+									"type": "text"
+								},
+								{
+									"key": "customerPhone",
+									"value": "01025232655",
+									"type": "text"
+								},
+								{
+									"key": "customerAddress",
+									"value": "new addresss 5 street , dfdf",
+									"type": "text"
+								},
+								{
+									"key": "notes",
+									"value": "new note here",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{app_url}}orders",
+							"host": [
+								"{{app_url}}orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}orders",
+							"host": [
+								"{{app_url}}orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show order",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{app_url}}orders/3",
+							"host": [
+								"{{app_url}}orders"
+							],
+							"path": [
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "- There are three end points\n    \n- First one to store new order  \n    Order made according to the data in customer cart\n    \n- second one to get all orders for authenticated user\n    \n- third one for showing information about specific order\n    \n\n## **Important note  \n**You must be logged in to access these end points",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"const token = pm.globals.get('auth_token'); // Replace 'auth_token' with the name of your global variable\r",
+							"\r",
+							"// Set the Authorization header with the Bearer token\r",
+							"pm.request.headers.add({\r",
+							"    key: 'Authorization',\r",
+							"    value: `Bearer ${token}`\r",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"\r",
+					"pm.request.headers.add({\r",
+					"    key: 'Accept',\r",
+					"    value: `application/json`\r",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
