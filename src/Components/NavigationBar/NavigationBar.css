@@ -1,0 +1,17 @@
+.nav__link:hover{
+    color: var(--mainColor) !important;
+}
+.nav{
+    transition: 250ms ease-in-out;
+    animation: .4s ease-out;
+  }
+  @keyframes top {
+    from{
+        top: -100px;
+        opacity: 0.3;
+    }
+    to{
+        top: 0px;
+        opacity: 1;
+    }
+  }

@@ -11,9 +11,10 @@ import {
   Home,
   Shopping,
   SingleProduct,
-  Authentication,
   Cart,
   Wishlist,
+  Orders,
+  UserAccountPage
 } from "./Pages/index";
 import { Box } from "@mui/material";
 import { Toaster } from "react-hot-toast";
@@ -45,17 +46,15 @@ function App() {
     createRoutesFromElements(
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path={`shopping/:shoppingType`} element={<Shopping />} />
+        <Route path={`shopping`} element={<Shopping />} />
         <Route
-          path="/:gender/:category/products/:productId"
+          path="products/:productId"
           element={<SingleProduct />}
         />
-        <Route path="Wishlist" element={<Wishlist />} />
-        <Route
-          path="account/:authenticationType"
-          element={<Authentication />}
-        />
+        <Route path="wishlist" element={<Wishlist />} />
         <Route path="cart-page" element={<Cart />} />
+        <Route path="orders-page" element={<Orders />} />
+        <Route path="user-page" element={<UserAccountPage />} />
       </Route>
     )
   );

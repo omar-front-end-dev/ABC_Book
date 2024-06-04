@@ -1,0 +1,17 @@
+.social-icon{
+    transition: 0.2s;
+}
+.social-icon:hover{
+    background-color: var(--mainColor);
+    color: #fff;
+    transform: scale(1.1);
+}
+.footer__link{
+    display: block;
+    margin: 15px 0;
+    font-size: 14px;
+    color: var(--secondTextColor);
+}
+.footer__link:hover{
+    text-decoration: underline;
+}
