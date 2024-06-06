@@ -6,5 +6,17 @@ import { Cart } from "./Cart/Cart";
 import { Wishlist } from "./Wishlist/Wishlist";
 import { Orders } from "./Orders/Orders";
 import { UserAccountPage } from "./UserAccountPage/UserAccountPage";
+import { NotExistPage } from "./NotExistPage/NotExistPage";
 
-export { Home, Shopping, SingleProduct, Authentication, Cart, Wishlist, Orders, UserAccountPage };
+
+export {
+  Home,
+  Shopping,
+  SingleProduct,
+  Authentication,
+  Cart,
+  Wishlist,
+  Orders,
+  UserAccountPage,
+  NotExistPage,
+};

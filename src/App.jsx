@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import { Layout } from "./Layout/Layout";
 
-
 import {
   Home,
   Shopping,
@@ -14,53 +13,51 @@ import {
   Cart,
   Wishlist,
   Orders,
-  UserAccountPage
+  UserAccountPage,
+  Authentication,
+  NotExistPage,
 } from "./Pages/index";
 import { Box } from "@mui/material";
 import { Toaster } from "react-hot-toast";
+import { IsLoggedIn } from "./Components/index";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "./theme";
 
 function App() {
-  // const { isAuth, userId } = useSelector((state) => state.authReducer);
-  // const { cartItems } = useSelector((state) => state.cartReducer);
-  // const { favoriteItems } = useSelector((state) => state.favoriteReducer);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   if (isAuth) dispatch(getCartData(userId));
-  //   dispatch(getFavoriteData(userId));
-  // }, [dispatch, isAuth, userId]);
-
-  // useEffect(() => {
-  //   if (userId && cartItems.length) {
-  //     dispatch(updateCartData({ id: userId, cart: cartItems }));
-  //   }
-  // }, [dispatch, userId, cartItems]);
-
-  // useEffect(() => {
-  //   if (userId && favoriteItems.length) {
-  //     dispatch(updateFavoriteData({ id: userId, favorites: favoriteItems }));
-  //   }
-  // }, [dispatch, userId, favoriteItems, cartItems]);
-
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path={`shopping`} element={<Shopping />} />
+      <>
         <Route
-          path="products/:productId"
-          element={<SingleProduct />}
+          path="authentication/:authType"
+          element={
+            <IsLoggedIn type="notIsAuth">
+              <Authentication />
+            </IsLoggedIn>
+          }
         />
-        <Route path="wishlist" element={<Wishlist />} />
-        <Route path="cart-page" element={<Cart />} />
-        <Route path="orders-page" element={<Orders />} />
-        <Route path="user-page" element={<UserAccountPage />} />
-      </Route>
+        <Route path="*" element={<NotExistPage />} />
+        <Route
+          path="/"
+          element={
+            <IsLoggedIn type="isAuth">
+              <Layout />
+            </IsLoggedIn>
+          }
+        >
+          <Route index element={<Home />} />
+          <Route path={`shopping`} element={<Shopping />} />
+          <Route path="books/:booksId" element={<SingleProduct />} />
+          <Route path="wishlist" element={<Wishlist />} />
+          <Route path="cart-page" element={<Cart />} />
+          <Route path="orders-page" element={<Orders />} />
+          <Route path="user-page" element={<UserAccountPage />} />
+        </Route>
+      </>
     )
   );
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <RouterProvider router={router} />
       <Box
         sx={{
@@ -71,7 +68,7 @@ function App() {
       >
         <Toaster position="top-center" />
       </Box>
-    </>
+    </ThemeProvider>
   );
 }
 

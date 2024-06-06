@@ -5,8 +5,11 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../RTK/slices/authSlice"
 
 export const HeaderUserPages = () => {
+  const dispatch = useDispatch()
   const theme = useTheme();
 
   return (
@@ -82,6 +85,7 @@ export const HeaderUserPages = () => {
         </li>
         <li>
           <Button
+            onClick={() => dispatch(logout())}
             className="main-hover-button"
             sx={{
               display: "flex",
