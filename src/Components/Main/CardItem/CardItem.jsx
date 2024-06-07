@@ -2,23 +2,35 @@ import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
 import { useTheme } from "@emotion/react";
-import "./CardItem.css"
+import "./CardItem.css";
 
 export const CardItem = ({ book }) => {
   const theme = useTheme();
 
   return (
-    <Box sx={{ bgcolor: "#fff" }}>
-      <Link to={`books/${book.id}`}>
+    <Box
+      sx={{
+        bgcolor: "#fff",
+        transition: ".2s",
+        boxShadow: "0px 0px 2px 1px #00000063",
+        "&:hover": {
+          transform: "scale(1.01)",
+          boxShadow: "0px 0px 6px 1px #000000a3",
+        },
+      }}
+    >
+      <Link to={`/books/${book.id}`}>
         <img
-            className="card__image"
-          style={{ width: "100%", objectFit: "cover" }}
+          className="card__image"
+          style={{
+            width: "100%",
+            objectFit: "cover",
+            borderBottom: `1px solid ${theme.palette.secondTextColor.main}`,
+          }}
           src={book.image}
           alt={book.title}
         />
-        <Box
-          sx={{p: "10px"}}
-        >
+        <Box sx={{ p: "10px" }}>
           <Typography
             component={"h6"}
             sx={{

@@ -16,6 +16,7 @@ import {
   UserAccountPage,
   Authentication,
   NotExistPage,
+  ShoppingByCategory,
 } from "./Pages/index";
 import { Box } from "@mui/material";
 import { Toaster } from "react-hot-toast";
@@ -51,6 +52,7 @@ function App() {
           <Route path="cart-page" element={<Cart />} />
           <Route path="orders-page" element={<Orders />} />
           <Route path="user-page" element={<UserAccountPage />} />
+          <Route path="shopping-category/:category" element={<ShoppingByCategory />} />
         </Route>
       </>
     )

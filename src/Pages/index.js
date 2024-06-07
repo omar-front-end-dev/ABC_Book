@@ -7,6 +7,7 @@ import { Wishlist } from "./Wishlist/Wishlist";
 import { Orders } from "./Orders/Orders";
 import { UserAccountPage } from "./UserAccountPage/UserAccountPage";
 import { NotExistPage } from "./NotExistPage/NotExistPage";
+import { ShoppingByCategory } from "./ShoppingByCategory/ShoppingByCategory";
 
 
 export {
@@ -19,4 +20,5 @@ export {
   Orders,
   UserAccountPage,
   NotExistPage,
+  ShoppingByCategory
 };

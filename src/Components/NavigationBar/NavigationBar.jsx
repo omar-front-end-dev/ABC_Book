@@ -5,8 +5,15 @@ import { NavigationBarSM } from "./NavigationBarComponents/NavigationBarSM";
 import "./NavigationBar.css";
 import { useEffect, useState } from "react";
 import logo from "../../../public/images/Logo/logo.png.webp";
+import { useGetData } from "../../Hooks/useGetData";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
+import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+
 
 export const NavigationBar = () => {
+  const { data } = useGetData("categories");
   const theme = useTheme();
   const [isSticky, setIsSticky] = useState(false);
 
@@ -25,6 +32,30 @@ export const NavigationBar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
+  const pageLinks = [
+    {
+      linkName: "my acount",
+      linkTo: "/user-page",
+      linkIcon: <PersonOutlineOutlinedIcon />,
+    },
+    {
+      linkName: "cart page",
+      linkTo: "/cart-page",
+      linkIcon: <ShoppingCartOutlinedIcon />,
+    },
+    {
+      linkName: "my favorite page",
+      linkTo: "/wishlist",
+      linkIcon: <FavoriteBorderIcon />,
+    },
+    {
+      linkName: "Order list",
+      linkTo: "/orders-page",
+      linkIcon: <ChecklistRtlIcon />,
+    },
+  ];
 
   return (
     <Box
@@ -50,13 +81,13 @@ export const NavigationBar = () => {
           <img style={{ width: "150px" }} src={logo} alt="logo image" />
         </Container>
       </Box>
-      <Box sx={{ py: "20px", bgcolor: theme.palette.sectionBgColor.main, }}>
+      <Box sx={{ py: "20px", bgcolor: theme.palette.sectionBgColor.main }}>
         <Container maxWidth="lg">
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            <NavigationBarLG />
+            <NavigationBarLG categories={data?.data} pageLinks={pageLinks} />
           </Box>
           <Box sx={{ display: { xs: "block", sm: "none" } }}>
-            <NavigationBarSM />
+            <NavigationBarSM categories={data?.data} pageLinks={pageLinks} />
           </Box>
         </Container>
       </Box>

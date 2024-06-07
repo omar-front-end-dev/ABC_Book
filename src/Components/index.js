@@ -10,6 +10,8 @@ import { Slides } from "./Main/Slides/Slides";
 import { CardItem } from "./Main/CardItem/CardItem";
 import { HomeSlider } from "./Main/HomeComponents/HomeSlider";
 import { SingleProductContent } from "./Main/SingleProductComponents/SingleProductContent";
+import { ShoppingByCategoryContent } from "./Main/ShoppingByCategoryComponents/ShoppingByCategoryContent";
+import { CategoriesFilterBooks } from "./Main/CategoriesFilterBooks/CategoriesFilterBooks"
 
 export {
   Header,
@@ -24,4 +26,6 @@ export {
   CardItem,
   HomeSlider,
   SingleProductContent,
+  ShoppingByCategoryContent,
+  CategoriesFilterBooks
 };

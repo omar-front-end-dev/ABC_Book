@@ -2,9 +2,8 @@
     height: 300px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 900px) {
     .card__image{
-
         height: 100%;
     }
 }

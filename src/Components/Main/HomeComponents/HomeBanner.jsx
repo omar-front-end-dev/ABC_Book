@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import banner from "../../../../public/images/banner.jpg";
+import banner from "../../../../public/images/banner/banner.jpg";
 import { useTheme } from "@emotion/react";
 export const HomeBanner = () => {
   const theme = useTheme();

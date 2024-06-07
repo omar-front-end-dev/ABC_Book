@@ -4,6 +4,8 @@ import { PropTypes } from "prop-types";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 
 export const SingleProductContent = ({ book }) => {
+ 
+
   const theme = useTheme();
   return (
     <Box
@@ -60,7 +62,7 @@ export const SingleProductContent = ({ book }) => {
               overflow: "hidden",
               textAlign: "center",
               "&:hover": { bgcolor: theme.palette.mainColor.main },
-              gap: 1
+              gap: 1,
             }}
           >
             Add To Cart
