@@ -1,27 +1,53 @@
 import { Box, Container } from "@mui/material";
-import { UserContent } from "../../Components/index";
 import { useTheme } from "@emotion/react";
-import { IsLoading } from "../../Components/index";
-import { useGetData } from "../../Hooks/useGetData";
+import { IsLoading, UserContent, UpdateUserInfo } from "../../Components/index";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseURL } from "../../../config";
+import { useParams } from "react-router-dom";
 
 export const UserAccountPage = () => {
-  // const user_data = localStorage.getItem("user_data")
-  const token = "113|dqzD1HAz3BCUp6da8ITUigNq1foAVOEoRpJRDmuK059f7780"
-  const { isLoading, error, data} = useGetData(token)
   const theme = useTheme();
+  const [isLoading, setIsLoading] = useState(true);
+  const [userInfo, setUserInfo] = useState(null);
+  const { info } = useParams();
 
-  console.log(data);
-  
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        setIsLoading(false);
+        const token = localStorage.getItem("user_data");
+        const response = await axios.get(`${baseURL}/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    };
+    setIsLoading(true);
+    fetchUserInfo();
+  }, []);
+
   return (
     <Box
       sx={{
-        color: theme.palette.secondTextColor.main,
         py: theme.palette.sectionPaddingY.main,
       }}
     >
-      <Container maxWidth="lg">
-        <UserContent />
-      </Container>
+      {isLoading ? (
+        <IsLoading />
+      ) : (
+        <Container maxWidth="lg">
+          {info == "user-info" ? (
+            <UserContent userInfo={userInfo} />
+          ) : (
+            <UpdateUserInfo />
+          )}
+        </Container>
+      )}
     </Box>
   );
 };

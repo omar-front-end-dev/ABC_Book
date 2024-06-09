@@ -16,15 +16,15 @@ export const CategoriesFilterBooks = ({ categories, setSelectedCategory }) => {
   };
 
   return (
-    <Box sx={{ p: "10px 35px" }}>
+    <Box>
       <Typography
         component={"h5"}
         sx={{
-          textAlign: "center",
-          fontSize: "18px",
+          fontSize: "22px",
           fontWeight: "bold",
-          color: theme.palette.secondTextColor.main,
-          mb: "20px",
+          fontFamily: "sans",
+          color: theme.palette.firstTextColor.main,
+          mb: "15px",
         }}
       >
         Filter by Genres

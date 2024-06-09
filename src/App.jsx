@@ -51,7 +51,7 @@ function App() {
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="cart-page" element={<Cart />} />
           <Route path="orders-page" element={<Orders />} />
-          <Route path="user-page" element={<UserAccountPage />} />
+          <Route path="user-page/:info" element={<UserAccountPage />} />
           <Route path="shopping-category/:category" element={<ShoppingByCategory />} />
         </Route>
       </>
@@ -63,7 +63,6 @@ function App() {
       <RouterProvider router={router} />
       <Box
         sx={{
-          fontSize: "16px",
           fontWeight: "bold",
           textTransform: "capitalize",
         }}

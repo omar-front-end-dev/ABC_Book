@@ -7,13 +7,11 @@ import { Box, Button, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 import { usePostData } from "../../../Hooks/usePostData";
 import { useDispatch } from "react-redux";
-import { login } from "../../../RTK/slices/authSlice"
+import { login } from "../../../RTK/slices/authSlice";
 
 export const Login = () => {
-  const { mutate, isLoading, error, data, isSuccess } = usePostData("auth/login");
-  const dispatch = useDispatch()
-
-  
+  const { mutate, isLoading } = usePostData("auth/login");
+  const dispatch = useDispatch();
 
   const theme = useTheme();
   const initialValues = {
@@ -30,17 +28,20 @@ export const Login = () => {
       .required("Password is required"),
   });
 
-
   const onSubmit = (values, { setSubmitting, resetForm }) => {
-    mutate(values);
-    if(isSuccess){
-      dispatch(login(data.data.token))
-      toast.success("You have been logged in successfully")
-    }else if(error){
-      toast.error(error.response.data.message)
-    }
-    resetForm();
-    setSubmitting(false);
+    mutate(values, {
+      onSuccess: (data) => {
+        dispatch(login(data.data.token));
+        toast.success("You have been logged in successfully");
+        resetForm();
+      },
+      onError: (error) => {
+        toast.error(error.response.data.message);
+      },
+      onSettled: () => {
+        setSubmitting(false);
+      },
+    });
   };
 
   return (
@@ -100,7 +101,7 @@ export const Login = () => {
 
             <Box
               sx={{
-                py: "40px",
+                py: "20px",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -142,7 +143,6 @@ export const Login = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                
                 {isLoading ? "loaded..." : "login"}
               </Button>
             </Box>

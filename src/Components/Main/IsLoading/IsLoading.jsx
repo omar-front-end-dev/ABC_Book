@@ -7,7 +7,7 @@ export const IsLoading = () => {
       sx={{
         position: "relative",
         width: "100%",
-        height: "100vh",
+        height: "50vh",
         bgcolor: "#fff",
       }}
     >

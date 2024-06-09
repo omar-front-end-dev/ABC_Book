@@ -43,7 +43,7 @@ export const HeaderUserPages = () => {
         <li>
           <Link
             className="header-user-pages__link"
-            to={"/user-page"}
+            to={"/user-page/user-info"}
             style={{
               display: "flex",
               color: theme.palette.secondTextColor.main,

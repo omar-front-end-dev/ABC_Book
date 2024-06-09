@@ -4,14 +4,18 @@ import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
 import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
-
-import { usePostData } from "../../../Hooks/usePostData";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import axios from "axios";
+import { baseURL } from "../../../../config";
+import { logout } from "../../../RTK/slices/authSlice";
+import { useDispatch } from "react-redux";
 
-export const Register = () => {
-  const { mutate, isLoading } = usePostData("auth/register");
+export const UpdateUserInfo = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const initialValues = {
     name: "",
@@ -33,23 +37,34 @@ export const Register = () => {
       .required("Confirm Password is required"),
   });
 
+  const updateUserInfo = async (data) => {
+    const token = localStorage.getItem("user_data");
+
+    try {
+      setIsLoading(true);
+      dispatch(logout());
+      await axios.put(`${baseURL}/user/update`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      toast.success("User information updated successfully Please log back in");
+      navigate("/authentication/login");
+    } catch (error) {
+      toast.error("Error updating user information");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-    mutate(values, {
-      onSuccess: () => {
-        toast.success("An account has been created successfully");
-        navigate("/authentication/login");
-        resetForm();
-        setSubmitting(false);
-      },
-      onError: (error) => {
-        toast.error(error.response.data.message);
-        setSubmitting(false);
-      },
-    });
+    await updateUserInfo(values);
+    setSubmitting(false);
+    resetForm();
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: { xs: "100%", md: "60%" }, m: "auto" }}>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -128,7 +143,7 @@ export const Register = () => {
             )}
             <Box
               sx={{
-                py: "20px",
+                py: "40px",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -143,14 +158,14 @@ export const Register = () => {
                   fontSize: { xs: "13px", md: "15px" },
                 }}
               >
-                Already have an account?{" "}
+                Go to{" "}
                 <Link
                   style={{ color: theme.palette.mainColor.main }}
-                  to={"/authentication/login"}
+                  to={"/user-page/user-info"}
                 >
-                  <strong>Login</strong>
+                  <strong>your information</strong>
                 </Link>{" "}
-                here
+                from here
               </Typography>
 
               <Button
@@ -170,7 +185,7 @@ export const Register = () => {
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isLoading ? "Loading..." : "Sign Up"}
+                {isLoading ? "Loading..." : "Update"}
               </Button>
             </Box>
           </Form>

@@ -16,7 +16,7 @@ export const Authentication = () => {
           sx={{
             display: "flex",
             justifyContent: "center",
-            my: "15px",
+            my: "20px",
           }}
         >
           <Box

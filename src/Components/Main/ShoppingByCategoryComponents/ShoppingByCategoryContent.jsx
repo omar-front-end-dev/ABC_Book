@@ -50,6 +50,7 @@ export const ShoppingByCategoryContent = ({ categories }) => {
                     position: "sticky",
                     top: "150px",
                     display: { xs: "none", md: "block" },
+                    p: "20px 25px",
                   }}
                 >
                   <CategoriesFilterBooks

@@ -11,8 +11,10 @@ import { CardItem } from "./Main/CardItem/CardItem";
 import { HomeSlider } from "./Main/HomeComponents/HomeSlider";
 import { SingleProductContent } from "./Main/SingleProductComponents/SingleProductContent";
 import { ShoppingByCategoryContent } from "./Main/ShoppingByCategoryComponents/ShoppingByCategoryContent";
-import { CategoriesFilterBooks } from "./Main/CategoriesFilterBooks/CategoriesFilterBooks"
-
+import { CategoriesFilterBooks } from "./Main/CategoriesFilterBooks/CategoriesFilterBooks";
+import { ShoppingFilterContent } from "./Main/ShoppingComponents/ShoppingFilterContent";
+import { ShoppingBooksContent } from "./Main/ShoppingComponents/ShoppingBooksContent";
+import { UpdateUserInfo } from "./Main/UserAccountPageComponents/UpdateUserInfo"
 export {
   Header,
   Footer,
@@ -27,5 +29,8 @@ export {
   HomeSlider,
   SingleProductContent,
   ShoppingByCategoryContent,
-  CategoriesFilterBooks
+  CategoriesFilterBooks,
+  ShoppingFilterContent,
+  ShoppingBooksContent,
+  UpdateUserInfo
 };
