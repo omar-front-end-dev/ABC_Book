@@ -14,7 +14,13 @@ import { ShoppingByCategoryContent } from "./Main/ShoppingByCategoryComponents/S
 import { CategoriesFilterBooks } from "./Main/CategoriesFilterBooks/CategoriesFilterBooks";
 import { ShoppingFilterContent } from "./Main/ShoppingComponents/ShoppingFilterContent";
 import { ShoppingBooksContent } from "./Main/ShoppingComponents/ShoppingBooksContent";
-import { UpdateUserInfo } from "./Main/UserAccountPageComponents/UpdateUserInfo"
+import { UpdateUserInfo } from "./Main/UserAccountPageComponents/UpdateUserInfo";
+import { CartList } from "./Main/CartComponents/CartList";
+import { WishlistList } from "./Main/WishlistComponents/WishlistList";
+import { CartPayment } from "./Main/CartComponents/CartPayment";
+import { IfIsEmpty } from "./Main/IfIsEmpty.jsx"
+
+
 export {
   Header,
   Footer,
@@ -32,5 +38,9 @@ export {
   CategoriesFilterBooks,
   ShoppingFilterContent,
   ShoppingBooksContent,
-  UpdateUserInfo
+  UpdateUserInfo,
+  CartList,
+  WishlistList,
+  CartPayment,
+  IfIsEmpty
 };

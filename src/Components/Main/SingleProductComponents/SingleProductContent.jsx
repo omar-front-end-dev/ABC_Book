@@ -1,12 +1,60 @@
 import { useTheme } from "@emotion/react";
 import { Box, Button, Typography } from "@mui/material";
-import { PropTypes } from "prop-types";
+import PropTypes from "prop-types";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import { useAuthorizedPostData } from "../../../Hooks/useAuthorizedPostData";
+import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
+import toast from "react-hot-toast";
 
 export const SingleProductContent = ({ book }) => {
- 
-
   const theme = useTheme();
+  const {
+    mutate: addToCart,
+    isLoading: isAddingToCart,
+  } = useAuthorizedPostData("cart");
+  const { data: cartData, refetch: refetchCart } = useAuthorizedGetData("cart");
+
+  const {
+    mutate: addToWishlist,
+    isLoading: isAddingToWishlist,
+  } = useAuthorizedPostData("wishlist/add");
+  const { refetch: refetchWishlist } = useAuthorizedGetData("wishlist/count");
+
+
+  const addToCartHandler = (id) => {
+    const isBookInCart = cartData?.data.some((item) => item.bookId === id);
+
+    if (!isBookInCart) {
+      addToCart(
+        { bookId: id },
+        {
+          onSuccess: () => {
+            toast.success("The book has been added to the shopping cart");
+            refetchCart();
+          },
+        }
+      );
+    } else {
+      toast.error("This book is already exists in the cart List");
+    }
+  };
+
+  const addToWishlistHandler = (id) => {
+    addToWishlist(
+      { bookId: id },
+      {
+        onSuccess: () => {
+          toast.success("The book has been added to the wishlist");
+          refetchWishlist();
+        },
+        onError: () => {
+          toast.error(`The choosen book is  aready exists in the whislist.`);
+        },
+      }
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -27,53 +75,94 @@ export const SingleProductContent = ({ book }) => {
           className="home-slider-book__image"
           style={{ width: "320px", height: "440px", objectFit: "cover" }}
           src={book.image}
-          alt=""
+          alt={book.title}
         />
         <Box>
           <Typography
-            component={"h3"}
+            component="h3"
             sx={{
               fontSize: { xs: "18px", md: "30px" },
               fontWeight: "600",
-              mb: "16px",
+              mb: "10px",
             }}
           >
             <strong>Title :</strong> {book.title}
           </Typography>
           <Typography
-            component={"p"}
+            component="p"
+            sx={{ fontSize: "20px", fontWeight: "500", mb: "10px" }}
+          >
+            <strong>Price :</strong> {book.price}
+          </Typography>
+          <Typography
+            component="p"
             sx={{ fontSize: "14px", fontWeight: "300", mb: "16px" }}
           >
             <strong>Description :</strong> {book.description}
           </Typography>
-          <Typography
-            component={"p"}
-            sx={{ fontSize: "20px", fontWeight: "500", mb: "16px" }}
-          >
-            <strong>price :</strong> {book.price}
-          </Typography>
-          <Button
-            className="main-hover-button"
+          <Box
             sx={{
-              color: theme.palette.colorWhite.main,
-              bgcolor: theme.palette.mainColor.main,
-              borderRadius: "30px",
-              padding: "15px 20px",
-              overflow: "hidden",
-              textAlign: "center",
-              "&:hover": { bgcolor: theme.palette.mainColor.main },
-              gap: 1,
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+              flexDirection: { xs: "column", sm: "row" },
             }}
           >
-            Add To Cart
-            <AddShoppingCartOutlinedIcon />
-          </Button>
+            <Button
+              onClick={() => addToCartHandler(book.id)}
+              className="main-hover-button"
+              sx={{
+                color: theme.palette.colorWhite.main,
+                bgcolor: theme.palette.mainColor.main,
+                padding: "10px 15px",
+                overflow: "hidden",
+                textAlign: "center",
+                "&:hover": { bgcolor: theme.palette.mainColor.main },
+                gap: 1,
+                fontSize: "14px",
+                width: "100%",
+              }}
+            >
+              {isAddingToCart ? (
+                "Adding to cart ...."
+              ) : (
+                <>
+                  {"Add To Cart"}
+                  <AddShoppingCartOutlinedIcon />
+                </>
+              )}
+            </Button>
+
+            <Button
+              onClick={() => addToWishlistHandler(book.id)}
+              className="main-hover-button"
+              sx={{
+                color: theme.palette.colorWhite.main,
+                bgcolor: theme.palette.firstTextColor.main,
+                padding: "10px 15px",
+                overflow: "hidden",
+                textAlign: "center",
+                "&:hover": { bgcolor: theme.palette.firstTextColor.main },
+                gap: 1,
+                fontSize: "14px",
+                width: "100%",
+              }}
+            >
+              {isAddingToWishlist ? (
+                "Adding To Wishlist ..."
+              ) : (
+                <>
+                  Add To Wishlist
+                  <BookmarkAddOutlinedIcon />
+                </>
+              )}
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>
   );
-};
-
+}
 SingleProductContent.propTypes = {
   book: PropTypes.object,
 };

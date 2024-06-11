@@ -6,11 +6,20 @@ import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
 import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../../../RTK/slices/authSlice"
+import { logout } from "../../../RTK/slices/authSlice";
+import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
+import { useEffect } from "react";
+
 
 export const HeaderUserPages = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const theme = useTheme();
+  const { data: cartData } = useAuthorizedGetData('cart');
+  const { data: wishlistData, refetch: refetchWishlist } = useAuthorizedGetData("wishlist/count");
+
+  useEffect(() =>{
+      refetchWishlist()
+  }, [refetchWishlist, wishlistData])
 
   return (
     <Box className="header-user-pages">
@@ -54,7 +63,7 @@ export const HeaderUserPages = () => {
           </Link>
         </li>
         <li>
-          <Badge color="error" badgeContent={0}>
+          <Badge color="error" badgeContent={wishlistData?.data.count}>
             <Link
               className="header-user-pages__link"
               style={{
@@ -69,7 +78,7 @@ export const HeaderUserPages = () => {
           </Badge>
         </li>
         <li>
-          <Badge color="error" badgeContent={0}>
+          <Badge color="error" badgeContent={cartData?.data.length}>
             <Link
               className="header-user-pages__link"
               to={"/cart-page"}
@@ -103,6 +112,6 @@ export const HeaderUserPages = () => {
           </Button>
         </li>
       </ul>
-    </Box>
+      </Box>
   );
 };
