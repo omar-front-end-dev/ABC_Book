@@ -13,13 +13,14 @@ import { SingleProductContent } from "./Main/SingleProductComponents/SingleProdu
 import { ShoppingByCategoryContent } from "./Main/ShoppingByCategoryComponents/ShoppingByCategoryContent";
 import { CategoriesFilterBooks } from "./Main/CategoriesFilterBooks/CategoriesFilterBooks";
 import { ShoppingFilterContent } from "./Main/ShoppingComponents/ShoppingFilterContent";
-import { ShoppingBooksContent } from "./Main/ShoppingComponents/ShoppingBooksContent";
 import { UpdateUserInfo } from "./Main/UserAccountPageComponents/UpdateUserInfo";
 import { CartList } from "./Main/CartComponents/CartList";
 import { WishlistList } from "./Main/WishlistComponents/WishlistList";
 import { CartPayment } from "./Main/CartComponents/CartPayment";
-import { IfIsEmpty } from "./Main/IfIsEmpty.jsx"
-
+import { IfIsEmpty } from "./Main/IfIsEmpty.jsx";
+import { OrderList } from "./Main/OrdersComponents/OrderList";
+import { ShowOrder } from "./Main/OrdersComponents/ShowOrder";
+import { ShoppingContent } from "./Main/ShoppingComponents/ShoppingContent"
 
 export {
   Header,
@@ -37,10 +38,12 @@ export {
   ShoppingByCategoryContent,
   CategoriesFilterBooks,
   ShoppingFilterContent,
-  ShoppingBooksContent,
   UpdateUserInfo,
   CartList,
   WishlistList,
   CartPayment,
-  IfIsEmpty
+  IfIsEmpty,
+  OrderList,
+  ShowOrder,
+  ShoppingContent
 };

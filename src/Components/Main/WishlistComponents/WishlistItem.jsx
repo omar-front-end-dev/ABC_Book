@@ -21,7 +21,7 @@ export const WishlistItem = ({ wishlist }) => {
         onSuccess: () => {
           toast.success("Removed from wishlist successfully");
           refetchWishlist();
-        },
+          },
       }
     );
   };

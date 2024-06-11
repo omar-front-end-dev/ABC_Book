@@ -52,7 +52,7 @@ export const NavigationBar = () => {
     },
     {
       linkName: "Order list",
-      linkTo: "/orders-page",
+      linkTo: "/orders-page/order-page",
       linkIcon: <ChecklistRtlIcon />,
     },
   ];
@@ -87,7 +87,7 @@ export const NavigationBar = () => {
             <NavigationBarLG categories={data?.data} pageLinks={pageLinks} />
           </Box>
           <Box sx={{ display: { xs: "block", sm: "none" } }}>
-            <NavigationBarSM categories={data?.data} pageLinks={pageLinks} />
+            <NavigationBarSM  categories={data?.data} pageLinks={pageLinks} />
           </Box>
         </Container>
       </Box>

@@ -2,7 +2,7 @@ import { Badge, Box, Button, Tooltip } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import ChecklistRtlIcon from '@mui/icons-material/ChecklistRtl';
+import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -10,16 +10,34 @@ import { logout } from "../../../RTK/slices/authSlice";
 import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
 import { useEffect } from "react";
 
-
 export const HeaderUserPages = () => {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { data: cartData } = useAuthorizedGetData('cart');
-  const { data: wishlistData, refetch: refetchWishlist } = useAuthorizedGetData("wishlist/count");
+  const { data: cartData, refetch: refetchCartData } =
+    useAuthorizedGetData("cart");
+  const { data: wishlistData, refetch: refetchWishlist } =
+    useAuthorizedGetData("wishlist/count");
+  const { data: order, refetch: refetchOrderData } =
+    useAuthorizedGetData(`orders`);
 
-  useEffect(() =>{
-      refetchWishlist()
-  }, [refetchWishlist, wishlistData])
+  useEffect(() => {
+    if (
+      cartData?.data.length ||
+      wishlistData?.data.count ||
+      order?.data.length
+    ) {
+      refetchCartData();
+      refetchOrderData();
+      refetchWishlist();
+    }
+  }, [
+    refetchOrderData,
+    refetchCartData,
+    refetchWishlist,
+    wishlistData,
+    cartData?.data.length,
+    order?.data.length,
+  ]);
 
   return (
     <Box className="header-user-pages">
@@ -33,10 +51,10 @@ export const HeaderUserPages = () => {
         }}
       >
         <li>
-          <Badge color="error" badgeContent={0}>
+          <Badge color="error" badgeContent={order?.data.length}>
             <Link
               className="header-user-pages__link"
-              to={"/orders-page"}
+              to={"/orders-page/order-page"}
               style={{
                 display: "flex",
                 color: theme.palette.secondTextColor.main,
@@ -44,7 +62,7 @@ export const HeaderUserPages = () => {
               }}
             >
               <Tooltip title="Order List" placement="top">
-                <ChecklistRtlIcon sx={{ fontSize: "30px"}}/>
+                <ChecklistRtlIcon sx={{ fontSize: "30px" }} />
               </Tooltip>
             </Link>
           </Badge>
@@ -105,13 +123,13 @@ export const HeaderUserPages = () => {
               position: "relative",
               overflow: "hidden",
               "&:hover": { bgcolor: theme.palette.mainColor.main },
-              fontSize: {xs: "11px", md: "13px"}
+              fontSize: { xs: "11px", md: "13px" },
             }}
           >
             Log out
           </Button>
         </li>
       </ul>
-      </Box>
+    </Box>
   );
 };

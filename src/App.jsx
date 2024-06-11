@@ -50,7 +50,7 @@ function App() {
           <Route path="books/:booksId" element={<SingleProduct />} />
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="cart-page" element={<Cart />} />
-          <Route path="orders-page" element={<Orders />} />
+          <Route path="orders-page/:orderPage" element={<Orders />} />
           <Route path="user-page/:info" element={<UserAccountPage />} />
           <Route path="shopping-category/:category" element={<ShoppingByCategory />} />
         </Route>

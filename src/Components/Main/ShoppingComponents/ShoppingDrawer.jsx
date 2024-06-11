@@ -1,14 +1,16 @@
 import AppsIcon from "@mui/icons-material/Apps";
 import { useTheme } from "@emotion/react";
-import { CategoriesFilterBooks } from "../CategoriesFilterBooks/CategoriesFilterBooks";
-import { PropTypes } from "prop-types";
 import { Box, Divider, Drawer, IconButton } from "@mui/material";
 import { useState } from "react";
+import { ShoppingFilterContent } from "./ShoppingFilterContent";
+import { PropTypes } from "prop-types";
 
-export function CategoriesFilterBooksDrawer({
-  categories,
-  setSelectedCategory,
-}) {
+export const ShoppingDrawer = ({
+  setCurrentCategory,
+  setPriceRange,
+  minPrice,
+  maxPrice,
+}) => {
   const [open, setOpen] = useState(false);
   const theme = useTheme();
 
@@ -17,22 +19,24 @@ export function CategoriesFilterBooksDrawer({
   };
 
   const DrawerList = (
-    <Box sx={{ width: 250,}} role="presentation" >
-      <CategoriesFilterBooks
-        categories={categories}
-        setSelectedCategory={setSelectedCategory}
+    <Box sx={{ width: 250 }} role="presentation">
+      <ShoppingFilterContent
+        setCurrentCategory={setCurrentCategory}
+        setPriceRange={setPriceRange}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
       />
       <Divider />
     </Box>
   );
 
   return (
-    <Box >
+    <Box>
       <IconButton
         sx={{
           color: "#fff",
           bgcolor: theme.palette.mainColor.main,
-          "&:hover" : {bgcolor: theme.palette.mainColor.main}
+          "&:hover": { bgcolor: theme.palette.mainColor.main },
         }}
         onClick={toggleDrawer(true)}
       >
@@ -43,9 +47,11 @@ export function CategoriesFilterBooksDrawer({
       </Drawer>
     </Box>
   );
-}
+};
 
-CategoriesFilterBooksDrawer.propTypes = {
-  categories: PropTypes.array,
-  setSelectedCategory: PropTypes.func,
+ShoppingDrawer.propTypes = {
+  setCurrentCategory: PropTypes.func,
+  setPriceRange: PropTypes.func,
+  minPrice: PropTypes.any,
+  maxPrice: PropTypes.any,
 };

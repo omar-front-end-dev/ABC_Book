@@ -109,7 +109,7 @@ export const Cart = () => {
                       </TableCell>
                     </TableRow>
                   </TableHead>
-                  <CartList cartList={cartData?.data} />
+                  <CartList cartList={cartData?.data || null} />
                 </Table>
               </TableContainer>
             </Box>

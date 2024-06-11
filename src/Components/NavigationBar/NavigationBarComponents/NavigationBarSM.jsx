@@ -144,7 +144,7 @@ export const NavigationBarSM = ({ categories, pageLinks }) => {
                             width: "100%",
                             padding: "5px 20px",
                           }}
-                          to={`shopping-category/${category.name}`}
+                          to={`/shopping-category/${category?.name}`}
                         >
                           {category.name}
                         </Link>
@@ -199,7 +199,7 @@ export const NavigationBarSM = ({ categories, pageLinks }) => {
                             width: "100%",
                             padding: "5px 20px",
                           }}
-                          to={"/categories"}
+                          to={`${link.linkTo}`}
                         >
                           {link.linkName}
                           {link.linkIcon}

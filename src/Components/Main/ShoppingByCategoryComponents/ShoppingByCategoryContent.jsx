@@ -50,7 +50,6 @@ export const ShoppingByCategoryContent = ({ categories }) => {
                     position: "sticky",
                     top: "150px",
                     display: { xs: "none", md: "block" },
-                    p: "20px 25px",
                   }}
                 >
                   <CategoriesFilterBooks
@@ -63,14 +62,16 @@ export const ShoppingByCategoryContent = ({ categories }) => {
                     display: {
                       xs: "block",
                       md: "none",
-                      position: siFixed ? "fixed" : "static",
-                      top: "150px",
-                      zIndex: "1000",
                     },
+                    position: siFixed ? "fixed" : "static",
+                    top: "150px",
+                    zIndex: "1000",
                   }}
                 >
-                  <CategoriesFilterBooksDrawer categories={categories}
-                    setSelectedCategory={setSelectedCategory} />
+                  <CategoriesFilterBooksDrawer
+                    categories={categories}
+                    setSelectedCategory={setSelectedCategory}
+                  />
                 </Box>
               </Grid>
               <Grid item xs={12} md={8.5}>

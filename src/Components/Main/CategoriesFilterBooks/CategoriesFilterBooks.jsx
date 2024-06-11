@@ -16,13 +16,12 @@ export const CategoriesFilterBooks = ({ categories, setSelectedCategory }) => {
   };
 
   return (
-    <Box>
+    <Box sx={{p: "20px 25px"}}>
       <Typography
         component={"h5"}
         sx={{
           fontSize: "22px",
           fontWeight: "bold",
-          fontFamily: "sans",
           color: theme.palette.firstTextColor.main,
           mb: "15px",
         }}
