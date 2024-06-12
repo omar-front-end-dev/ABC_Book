@@ -66,7 +66,7 @@ export const NavigationBar = () => {
         animationName: isSticky ? "top" : false,
         boxShadow: isSticky ? "0px 2px 15px #33333357" : false,
         top: "0",
-        zIndex: "200",
+        zIndex: "10",
       }}
     >
       <Box
