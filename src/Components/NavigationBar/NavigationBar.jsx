@@ -37,7 +37,7 @@ export const NavigationBar = () => {
   const pageLinks = [
     {
       linkName: "my account",
-      linkTo: "/user-page/user-info",
+      linkTo: "/user-account/user-info",
       linkIcon: <PersonOutlineOutlinedIcon />,
     },
     {

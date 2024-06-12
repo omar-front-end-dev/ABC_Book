@@ -37,7 +37,7 @@ export const Register = () => {
     mutate(values, {
       onSuccess: () => {
         toast.success("An account has been created successfully");
-        navigate("/authentication/login");
+        navigate("/user-account/login");
         resetForm();
         setSubmitting(false);
       },
@@ -62,7 +62,6 @@ export const Register = () => {
                 {({ field }) => (
                   <TextField
                     {...field}
-                    id="outlined-basic"
                     label="Name"
                     variant="outlined"
                     fullWidth
@@ -78,7 +77,6 @@ export const Register = () => {
                 {({ field }) => (
                   <TextField
                     {...field}
-                    id="outlined-basic"
                     label="Email"
                     variant="outlined"
                     fullWidth
@@ -95,7 +93,6 @@ export const Register = () => {
                   <TextField
                     {...field}
                     type="password"
-                    id="outlined-basic"
                     label="Password"
                     variant="outlined"
                     fullWidth
@@ -112,7 +109,6 @@ export const Register = () => {
                   <TextField
                     {...field}
                     type="password"
-                    id="outlined-basic"
                     label="Confirm Password"
                     variant="outlined"
                     fullWidth
@@ -146,7 +142,7 @@ export const Register = () => {
                 Already have an account?{" "}
                 <Link
                   style={{ color: theme.palette.mainColor.main }}
-                  to={"/authentication/login"}
+                  to={"/user-account/login"}
                 >
                   <strong>Login</strong>
                 </Link>{" "}

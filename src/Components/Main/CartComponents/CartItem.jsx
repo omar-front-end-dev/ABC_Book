@@ -30,6 +30,7 @@ export const CartItem = ({ cart }) => {
 
   const removeCartItem = async (id) => {
     const token = localStorage.getItem("user_data");
+    toast.success("Removed successfully")
     try {
       await axios.delete(`${baseURL}/cart/${id}`, {
         headers: {

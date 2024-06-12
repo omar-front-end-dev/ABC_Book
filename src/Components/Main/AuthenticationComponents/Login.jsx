@@ -1,17 +1,19 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTheme } from "@emotion/react";
 import { Box, Button, Typography } from "@mui/material";
 import toast from "react-hot-toast";
 import { usePostData } from "../../../Hooks/usePostData";
 import { useDispatch } from "react-redux";
 import { login } from "../../../RTK/slices/authSlice";
-
+import { useAuthorizedGetData } from '../../../Hooks/useAuthorizedGetData'
 export const Login = () => {
   const { mutate, isLoading } = usePostData("auth/login");
+  const { refetch } = useAuthorizedGetData("orders");
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const theme = useTheme();
   const initialValues = {
@@ -32,8 +34,10 @@ export const Login = () => {
     mutate(values, {
       onSuccess: (data) => {
         dispatch(login(data.data.token));
+        refetch()
         toast.success("You have been logged in successfully");
         resetForm();
+        navigate("/")
       },
       onError: (error) => {
         toast.error(error.response.data.message);
@@ -58,7 +62,6 @@ export const Login = () => {
                 {({ field }) => (
                   <TextField
                     {...field}
-                    id="outlined-basic"
                     label="Email"
                     variant="outlined"
                     fullWidth
@@ -81,7 +84,6 @@ export const Login = () => {
                   <TextField
                     {...field}
                     type="password"
-                    id="outlined-basic"
                     label="Password"
                     variant="outlined"
                     fullWidth
@@ -119,7 +121,7 @@ export const Login = () => {
                 Don’t have an account?{" "}
                 <Link
                   style={{ color: theme.palette.mainColor.main }}
-                  to={"/authentication/register"}
+                  to={"/user-account/register"}
                 >
                   <strong>create account</strong>
                 </Link>{" "}

@@ -6,9 +6,12 @@ import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import { useAuthorizedPostData } from "../../../Hooks/useAuthorizedPostData";
 import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 export const SingleProductContent = ({ book }) => {
   const theme = useTheme();
+  const { isAuth } = useSelector(state => state.authReducer);
+
   const {
     mutate: addToCart,
     isLoading: isAddingToCart,
@@ -19,28 +22,37 @@ export const SingleProductContent = ({ book }) => {
     mutate: addToWishlist,
     isLoading: isAddingToWishlist,
   } = useAuthorizedPostData("wishlist/add");
-  const { refetch: refetchWishlist } = useAuthorizedGetData("wishlist/count");
+  const { refetch: refetchWishlist, } = useAuthorizedGetData("wishlist/count");
 
 
   const addToCartHandler = (id) => {
     const isBookInCart = cartData?.data.some((item) => item.bookId === id);
+    
+    if (!isAuth) {
+        toast.error("Please create an account or log in");
+        return;
+    }
 
     if (!isBookInCart) {
-      addToCart(
-        { bookId: id },
-        {
-          onSuccess: () => {
-            toast.success("The book has been added to the shopping cart");
-            refetchCart();
-          },
-        }
-      );
+        addToCart(
+            { bookId: id },
+            {
+                onSuccess: () => {
+                    toast.success("The book has been added to the shopping cart");
+                    refetchCart();
+                },
+            }
+        );
     } else {
-      toast.error("This book is already exists in the cart List");
+        toast.error("This book already exists in the cart List");
     }
-  };
+};
 
   const addToWishlistHandler = (id) => {
+    if (!isAuth) {
+      toast.error("Please create an account or log in");
+      return;
+  }
     addToWishlist(
       { bookId: id },
       {
@@ -49,7 +61,7 @@ export const SingleProductContent = ({ book }) => {
           refetchWishlist();
         },
         onError: () => {
-          toast.error(`The choosen book is  aready exists in the whislist.`);
+          toast.error(`The chosen book is already exists in the wishlist.`);
         },
       }
     );

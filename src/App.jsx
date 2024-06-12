@@ -14,13 +14,12 @@ import {
   Wishlist,
   Orders,
   UserAccountPage,
-  Authentication,
   NotExistPage,
   ShoppingByCategory,
 } from "./Pages/index";
 import { Box } from "@mui/material";
 import { Toaster } from "react-hot-toast";
-import { IsLoggedIn } from "./Components/index";
+
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "./theme";
 
@@ -28,31 +27,19 @@ function App() {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route
-          path="authentication/:authType"
-          element={
-            <IsLoggedIn type="notIsAuth">
-              <Authentication />
-            </IsLoggedIn>
-          }
-        />
         <Route path="*" element={<NotExistPage />} />
-        <Route
-          path="/"
-          element={
-            <IsLoggedIn type="isAuth">
-              <Layout />
-            </IsLoggedIn>
-          }
-        >
+        <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path={`shopping`} element={<Shopping />} />
           <Route path="books/:booksId" element={<SingleProduct />} />
           <Route path="wishlist" element={<Wishlist />} />
           <Route path="cart-page" element={<Cart />} />
           <Route path="orders-page/:orderPage" element={<Orders />} />
-          <Route path="user-page/:info" element={<UserAccountPage />} />
-          <Route path="shopping-category/:category" element={<ShoppingByCategory />} />
+          <Route path="user-account/:typeAuth" element={<UserAccountPage />} />
+          <Route
+            path="shopping-category/:category"
+            element={<ShoppingByCategory />}
+          />
         </Route>
       </>
     )

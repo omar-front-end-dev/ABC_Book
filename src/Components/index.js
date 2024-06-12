@@ -2,7 +2,6 @@ import { Header } from "./Header/Header";
 import { Footer } from "./Footer/Footer";
 import { ScrollUp } from "./Main/ScrollUp/ScrollUp";
 import { NavigationBar } from "./NavigationBar/NavigationBar";
-import { IsLoggedIn } from "./Main/IsLoggedIn";
 import { IsLoading } from "./Main/IsLoading/IsLoading";
 import { UserContent } from "./Main/UserAccountPageComponents/UserContent";
 import { HomeBanner } from "./Main/HomeComponents/HomeBanner";
@@ -20,14 +19,14 @@ import { CartPayment } from "./Main/CartComponents/CartPayment";
 import { IfIsEmpty } from "./Main/IfIsEmpty.jsx";
 import { OrderList } from "./Main/OrdersComponents/OrderList";
 import { ShowOrder } from "./Main/OrdersComponents/ShowOrder";
-import { ShoppingContent } from "./Main/ShoppingComponents/ShoppingContent"
+import { ShoppingContent } from "./Main/ShoppingComponents/ShoppingContent";
+import { Authentication } from "./Main/AuthenticationComponents/Authentication"
 
 export {
   Header,
   Footer,
   ScrollUp,
   NavigationBar,
-  IsLoggedIn,
   IsLoading,
   UserContent,
   HomeBanner,
@@ -45,5 +44,6 @@ export {
   IfIsEmpty,
   OrderList,
   ShowOrder,
-  ShoppingContent
+  ShoppingContent,
+  Authentication
 };

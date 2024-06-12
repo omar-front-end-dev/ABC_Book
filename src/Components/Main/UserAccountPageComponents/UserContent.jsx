@@ -82,7 +82,7 @@ export const UserContent = ({ userInfo }) => {
         </Typography>
         <Link
           className="main-hover-button"
-          to={"/user-page/user"}
+          to={"/user-account/updateUser"}
           style={{
             position: "relative",
             color: theme.palette.colorWhite.main,

@@ -161,7 +161,7 @@ export const UpdateUserInfo = () => {
                 Go to{" "}
                 <Link
                   style={{ color: theme.palette.mainColor.main }}
-                  to={"/user-page/user-info"}
+                  to={"/user-account/user-info"}
                 >
                   <strong>your information</strong>
                 </Link>{" "}

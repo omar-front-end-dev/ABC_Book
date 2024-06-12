@@ -5,13 +5,15 @@ import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
 import { useTheme } from "@emotion/react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../RTK/slices/authSlice";
 import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
 import { useEffect } from "react";
 
 export const HeaderUserPages = () => {
-  const dispatch = useDispatch();
+  const { isAuth } = useSelector(state => state.authReducer);
+
+   const dispatch = useDispatch();
   const theme = useTheme();
   const { data: cartData, refetch: refetchCartData } =
     useAuthorizedGetData("cart");
@@ -70,7 +72,7 @@ export const HeaderUserPages = () => {
         <li>
           <Link
             className="header-user-pages__link"
-            to={"/user-page/user-info"}
+            to={"/user-account/user-info"}
             style={{
               display: "flex",
               color: theme.palette.secondTextColor.main,
@@ -111,8 +113,26 @@ export const HeaderUserPages = () => {
           </Badge>
         </li>
         <li>
+          {!isAuth  ? <Link  to={"/user-account/login"} className="main-hover-button"
+            style={{
+              display: "flex",
+              padding:  "10px 25px",
+              background: theme.palette.secondTextColor.main,
+              color: theme.palette.colorWhite.main,
+              borderRadius: "30px",
+              position: "relative",
+              overflow: "hidden",
+              fontSize: "15px",
+              textTransform: "uppercase"
+            }}>Login</Link> : (
+
           <Button
-            onClick={() => dispatch(logout())}
+            onClick={() => {
+              dispatch(logout());
+              refetchCartData();
+              refetchWishlist();
+              refetchOrderData();
+            }}
             className="main-hover-button"
             sx={{
               display: "flex",
@@ -128,6 +148,7 @@ export const HeaderUserPages = () => {
           >
             Log out
           </Button>
+          )}
         </li>
       </ul>
     </Box>

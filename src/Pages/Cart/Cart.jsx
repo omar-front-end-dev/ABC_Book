@@ -18,18 +18,17 @@ export const Cart = () => {
   const theme = useTheme();
   const { data: cartData, isLoading } = useAuthorizedGetData("cart");
 
-  
   if (cartData?.data.length == 0 || cartData?.data.length == undefined) {
     return (
       <IfIsEmpty
-      icon={<RemoveShoppingCartOutlinedIcon sx={{ fontSize: "50px" }} />}
-      text={"Cart list is empty"}
+        icon={<RemoveShoppingCartOutlinedIcon sx={{ fontSize: "50px" }} />}
+        text={"Cart list is empty"}
       />
-      );
-      }
-        if (isLoading) {
-          return <IsLoading />;
-        }
+    );
+  }
+  if (isLoading) {
+    return <IsLoading />;
+  }
 
   return (
     <Box>

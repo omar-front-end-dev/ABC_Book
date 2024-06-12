@@ -1,13 +1,18 @@
 import { Box, Container } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { IsLoading, UserContent, UpdateUserInfo } from "../../Components/index";
+import { IsLoading, UserContent, UpdateUserInfo, Authentication} from "../../Components/index";
 import { useParams } from "react-router-dom";
 import { useAuthorizedGetData } from "../../Hooks/useAuthorizedGetData";
+import { useSelector } from "react-redux";
+
 
 export const UserAccountPage = () => {
   const { data: userInfo, isLoading } = useAuthorizedGetData("user");
   const theme = useTheme();
-  const { info } = useParams();
+  const { typeAuth } = useParams();
+  
+
+  const { isAuth } = useSelector(state => state.authReducer)
 
   return (
     <Box
@@ -19,11 +24,15 @@ export const UserAccountPage = () => {
         <IsLoading />
       ) : (
         <Container maxWidth="lg">
-          {info == "user-info" ? (
-            <UserContent userInfo={userInfo} />
-          ) : (
-            <UpdateUserInfo />
+          {!isAuth ? <Authentication/> : 
+          <>
+            {typeAuth == "updateUser" ? (
+              <UpdateUserInfo />
+              ) : (
+              <UserContent userInfo={userInfo} />
           )}
+          </>
+          }
         </Container>
       )}
     </Box>

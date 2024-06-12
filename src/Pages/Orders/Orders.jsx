@@ -13,18 +13,20 @@ import { useParams } from "react-router-dom";
 import { IfIsEmpty, IsLoading, OrderList, ShowOrder } from "../../Components";
 import { useTheme } from "@emotion/react";
 import ChecklistRtlIcon from "@mui/icons-material/ChecklistRtl";
+import { useSelector } from "react-redux";
 
 export const Orders = () => {
   const theme = useTheme();
   const { data: orderList, isLoading } = useAuthorizedGetData("orders");
   const { orderPage } = useParams();
+  const { isAuth } = useSelector(state => state.authReducer)
   
 
   return (
     <Box>
       <Container maxWidth="lg">
         <Box>
-          {orderList?.data.length == 0 ? (
+          {orderList?.data.length == 0 || !isAuth ? (
             <IfIsEmpty
               icon={<ChecklistRtlIcon sx={{ fontSize: "50px" }} />}
               text={"Wishlist list is empty"}

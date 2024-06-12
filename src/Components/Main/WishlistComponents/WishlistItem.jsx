@@ -6,13 +6,14 @@ import { useAuthorizedPostData } from "../../../Hooks/useAuthorizedPostData";
 import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
 import toast from "react-hot-toast";
 
-
 export const WishlistItem = ({ wishlist }) => {
   const theme = useTheme();
   const { mutate: removeFromWishlist, isLoading: isRemovingFromWishlist } =
     useAuthorizedPostData("wishlist/remove");
   const { image, title, category, description, price, id } = wishlist.book;
   const { refetch: refetchWishlist } = useAuthorizedGetData("wishlist/get");
+  const { refetch: refetchWishlistCount } =
+    useAuthorizedGetData("wishlist/count");
 
   const removeFromWishlistHandler = (id) => {
     removeFromWishlist(
@@ -21,7 +22,7 @@ export const WishlistItem = ({ wishlist }) => {
         onSuccess: () => {
           toast.success("Removed from wishlist successfully");
           refetchWishlist();
-          },
+        },
       }
     );
   };
@@ -86,7 +87,10 @@ export const WishlistItem = ({ wishlist }) => {
         align="center"
       >
         <Button
-          onClick={() => removeFromWishlistHandler(wishlist.id)}
+          onClick={() => {
+            removeFromWishlistHandler(wishlist.id);
+            refetchWishlistCount();
+          }}
           className="main-hover-button"
           sx={{
             p: "10px 15px",
