@@ -7,10 +7,12 @@ import { useAuthorizedPostData } from "../../../Hooks/useAuthorizedPostData";
 import { useAuthorizedGetData } from "../../../Hooks/useAuthorizedGetData";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const SingleProductContent = ({ book }) => {
   const theme = useTheme();
   const { isAuth } = useSelector(state => state.authReducer);
+  const navigate = useNavigate()
 
   const {
     mutate: addToCart,
@@ -24,12 +26,18 @@ export const SingleProductContent = ({ book }) => {
   } = useAuthorizedPostData("wishlist/add");
   const { refetch: refetchWishlist, } = useAuthorizedGetData("wishlist/count");
 
+  const toLogin = () =>{
+    setTimeout(() => {
+      navigate("/user-account/login")
+    }, 3000);
+  }
 
   const addToCartHandler = (id) => {
     const isBookInCart = cartData?.data.some((item) => item.bookId === id);
     
     if (!isAuth) {
         toast.error("Please create an account or log in");
+        toLogin()
         return;
     }
 
@@ -51,6 +59,7 @@ export const SingleProductContent = ({ book }) => {
   const addToWishlistHandler = (id) => {
     if (!isAuth) {
       toast.error("Please create an account or log in");
+      toLogin()
       return;
   }
     addToWishlist(
