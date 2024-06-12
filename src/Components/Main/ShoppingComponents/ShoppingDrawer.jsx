@@ -8,6 +8,7 @@ import { PropTypes } from "prop-types";
 export const ShoppingDrawer = ({
   setCurrentCategory,
   setPriceRange,
+  setRangeBetween,
   minPrice,
   maxPrice,
 }) => {
@@ -25,6 +26,7 @@ export const ShoppingDrawer = ({
         setPriceRange={setPriceRange}
         minPrice={minPrice}
         maxPrice={maxPrice}
+        setRangeBetween={setRangeBetween}
       />
       <Divider />
     </Box>
@@ -52,6 +54,7 @@ export const ShoppingDrawer = ({
 ShoppingDrawer.propTypes = {
   setCurrentCategory: PropTypes.func,
   setPriceRange: PropTypes.func,
+  setRangeBetween: PropTypes.func,
   minPrice: PropTypes.any,
   maxPrice: PropTypes.any,
 };

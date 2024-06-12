@@ -11,57 +11,53 @@ import { useNavigate } from "react-router-dom";
 
 export const SingleProductContent = ({ book }) => {
   const theme = useTheme();
-  const { isAuth } = useSelector(state => state.authReducer);
-  const navigate = useNavigate()
+  const { isAuth } = useSelector((state) => state.authReducer);
+  const navigate = useNavigate();
 
-  const {
-    mutate: addToCart,
-    isLoading: isAddingToCart,
-  } = useAuthorizedPostData("cart");
+  const { mutate: addToCart, isLoading: isAddingToCart } =
+    useAuthorizedPostData("cart");
   const { data: cartData, refetch: refetchCart } = useAuthorizedGetData("cart");
 
-  const {
-    mutate: addToWishlist,
-    isLoading: isAddingToWishlist,
-  } = useAuthorizedPostData("wishlist/add");
-  const { refetch: refetchWishlist, } = useAuthorizedGetData("wishlist/count");
+  const { mutate: addToWishlist, isLoading: isAddingToWishlist } =
+    useAuthorizedPostData("wishlist/add");
+  const { refetch: refetchWishlist } = useAuthorizedGetData("wishlist/count");
 
-  const toLogin = () =>{
+  const toLogin = () => {
     setTimeout(() => {
-      navigate("/user-account/login")
+      navigate("/user-account/login");
     }, 3000);
-  }
+  };
 
   const addToCartHandler = (id) => {
     const isBookInCart = cartData?.data.some((item) => item.bookId === id);
-    
+
     if (!isAuth) {
-        toast.error("Please create an account or log in");
-        toLogin()
-        return;
+      toast.error("Please create an account or log in");
+      toLogin();
+      return;
     }
 
     if (!isBookInCart) {
-        addToCart(
-            { bookId: id },
-            {
-                onSuccess: () => {
-                    toast.success("The book has been added to the shopping cart");
-                    refetchCart();
-                },
-            }
-        );
+      addToCart(
+        { bookId: id },
+        {
+          onSuccess: () => {
+            toast.success("The book has been added to the shopping cart");
+            refetchCart();
+          },
+        }
+      );
     } else {
-        toast.error("This book already exists in the cart List");
+      toast.error("This book already exists in the cart List");
     }
-};
+  };
 
   const addToWishlistHandler = (id) => {
     if (!isAuth) {
       toast.error("Please create an account or log in");
-      toLogin()
+      toLogin();
       return;
-  }
+    }
     addToWishlist(
       { bookId: id },
       {
@@ -183,7 +179,7 @@ export const SingleProductContent = ({ book }) => {
       </Box>
     </Box>
   );
-}
+};
 SingleProductContent.propTypes = {
   book: PropTypes.object,
 };

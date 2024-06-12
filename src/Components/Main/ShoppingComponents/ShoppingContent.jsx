@@ -62,7 +62,9 @@ export const ShoppingContent = () => {
               <ShoppingDrawer  setCurrentCategory={setCurrentCategory}
                 setPriceRange={setPriceRange}
                 minPrice={priceRange.minPrice}
-                maxPrice={priceRange.maxPrice}/>
+                maxPrice={priceRange.maxPrice}
+                setRangeBetween={setRangeBetween}
+                />
             </Box>
           </Grid>
           <Grid item xs={12} md={8.5}>

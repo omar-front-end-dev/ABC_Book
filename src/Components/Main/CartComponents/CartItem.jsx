@@ -15,16 +15,21 @@ export const CartItem = ({ cart }) => {
   const { refetch: refetchCart } = useAuthorizedGetData("cart");
 
   const updateQuantityHandler = (id, qty) => {
+    if (qty < 1) {
+        toast.error("Quantity must be at least 1");
+        return;
+    }
+
     updateQuantity(
-      { cartId: id, qty },
-      {
-        onSuccess: () => {
-          toast.success("Updated quantity successfully");
-          refetchCart();
-        },
-      }
+        { cartId: id, qty },
+        {
+            onSuccess: () => {
+                toast.success("Updated quantity successfully");
+                refetchCart();
+            },
+        }
     );
-  };
+};
 
   
 
