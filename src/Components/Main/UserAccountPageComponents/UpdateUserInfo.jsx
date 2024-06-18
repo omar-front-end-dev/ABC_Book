@@ -49,7 +49,7 @@ export const UpdateUserInfo = () => {
         },
       });
       toast.success("User information updated successfully Please log back in");
-      navigate("/authentication/login");
+      navigate("/user-account/login");
     } catch (error) {
       toast.error("Error updating user information");
     } finally {
