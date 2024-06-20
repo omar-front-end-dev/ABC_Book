@@ -1,5 +1,5 @@
 import { useTheme } from "@emotion/react";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useEffect, useRef, useState } from "react";
 import * as Yup from "yup";
@@ -47,22 +47,27 @@ export const CartPaymentForm = ({ isCompletedOrder }) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("The order was made successfully");
+      return true;
     } catch (error) {
       console.error("Error posting data:", error);
+      toast.error("Failed to place the order. Please try again.");
+      return false;
     }
   };
 
   useEffect(() => {
     if (isCompletedOrder === "COMPLETED" && isCompletedOrder !== "") {
       formikRef.current.submitForm();
-      toast.success("The order was made successfully");
-      refetch()
     }
-  }, [isCompletedOrder, refetch]);
+  }, [isCompletedOrder]);
 
   const onSubmit = async (values, { setSubmitting, resetForm }) => {
-    await postOrderData(values);
-    resetForm();
+    const success = await postOrderData(values);
+    if (success) {
+      refetch();
+      resetForm();
+    }
     setSubmitting(false);
   };
 
@@ -200,11 +205,27 @@ export const CartPaymentForm = ({ isCompletedOrder }) => {
               component="div"
             />
           </Box>
+          <Button
+            onClick={() => formikRef.current.submitForm()}
+            className="main-hover-button"
+            sx={{
+              width: "100%",
+              color: "#fff",
+              bgcolor: theme.palette.secondTextColor.main,
+              py: "10px",
+              fontSize: "18px",
+              mt: "10px",
+              "&:hover": { bgcolor: theme.palette.secondTextColor.main },
+            }}
+          >
+            Payment Cash
+          </Button>
         </Form>
       </Formik>
     </Box>
   );
 };
+
 
 CartPaymentForm.propTypes = {
   isCompletedOrder: PropTypes.string,

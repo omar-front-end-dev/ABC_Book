@@ -12,8 +12,6 @@ export const CartPaymentPaypal = ({ setIsCompletedOrder }) => {
     return accumulator + currentValue.totalPrice;
   }, 0);
 
-  
-
   const createOrder = (data, actions) => {
     return actions.order.create({
       intent: "CAPTURE",
@@ -42,7 +40,11 @@ export const CartPaymentPaypal = ({ setIsCompletedOrder }) => {
     <Box sx={{ position: "sticky", top: 130 }}>
       <Typography
         component="h3"
-        sx={{ fontSize: "25px", color: theme.palette.secondTextColor.main, py: "10px" }}
+        sx={{
+          fontSize: "25px",
+          color: theme.palette.secondTextColor.main,
+          py: "10px",
+        }}
       >
         Total Price:{" "}
         <strong style={{ color: theme.palette.mainColor.main }}>

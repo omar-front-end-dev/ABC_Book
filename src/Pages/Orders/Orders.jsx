@@ -29,7 +29,7 @@ export const Orders = () => {
           {orderList?.data.length == 0 || !isAuth ? (
             <IfIsEmpty
               icon={<ChecklistRtlIcon sx={{ fontSize: "50px" }} />}
-              text={"Wishlist list is empty"}
+              text={"Order List Is Empty"}
             />
           ) : (
             <>
